@@ -4,20 +4,20 @@
 	// https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 	// http://www.stoimen.com/blog/2012/10/08/computer-algorithms-shortest-path-in-a-graph/
 	// https://www.github.com/fisharebest/algorithm/
-
+	include ("djak.php");
 	require ("sql/login-proj.php");
-	$origin = mysqli_real_escape_string($connect, $_POST['ori']);
-	$destinate = mysqli_real_escape_string($connect, $_POST['dest']);
+	$origin = mysqli_real_escape_string($connect, $_REQUEST['ori']);
+	$destinate = mysqli_real_escape_string($connect, $_REQUEST['dest']);
 
 	$check_r = "SELECT DISTINCT origin FROM route_list UNION SELECT DISTINCT destination FROM route_list";
 	$x_check = mysqli_query($connect, $check_r);
 	$count = mysqli_num_rows($x_check);
-	$arr = array();
+	$_distArr = array();
 
 	//Build array
 	for ($i=0; $i<$count; $i++) {
 		for ($j=0; $j<$count; $j++) {
-			$arr[$i][$j] = 0;
+			$_distArr[$i][$j] = 0;
 		}
 	}
 
@@ -36,25 +36,29 @@
 		$ori = array_search($row['origin'], $terminals);
 		$dest = array_search($row['destination'], $terminals);
 
-		$arr[$ori][$dest] = 1;
-		$arr[$dest][$ori] = 1;
+		$_distArr[$ori][$dest] = 1;
+		$_distArr[$dest][$ori] = 1;
 	}
-	
+	define('I',1000);
+	$dijkstra = new Dijkstra($_distArr, I, $count);
+	$fromClass = $origin; 
+	$toClass = $destinate; 
+
+	$dijkstra->findShortestPath($fromClass, $toClass);
+
 	//prints
-	print_r($arr);
+	print_r($_distArr);
 	//print_r($ori);
 	//print_r($dest);
 	print_r($terminals);
 
-	/*$check_r = "SELECT * FROM route_list";
-	$x_check2 = mysqli_query($connect, $check_r);
+	echo '<pre>'; 
+	//echo "the map looks like:\n\n"; 
+	//echo $dijkstra -> printMap($ourMap); 
+	echo "\n\n the shortest route from class  ".$fromClass." to ".$toClass." is  :\n"; 
+	echo $dijkstra -> getResults((int)$toClass);
+	echo '</pre>'; 
 
-	while ($rowx = mysqli_fetch_assoc($x_check2)) {
-		$_distFrom[] = $rowx['origin'];
-		$_distTo[] = $rowx['destination'];
-	}
-	print_r($_distFrom);
-	print_r($_distTo);
-	print_r($arr);*/
+
 ?>
 
