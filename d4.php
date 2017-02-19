@@ -14,14 +14,14 @@
 	$count = mysqli_num_rows($x_check);
 	$_distArr = array();
 
-	//Build array
+	//Build matrix of null
 	for ($i=0; $i<$count; $i++) {
 		for ($j=0; $j<$count; $j++) {
 			$_distArr[$i][$j] = NULL;
 		}
 	}
 
-	//Fetch data terminal
+	//Fetch data of terminal
 	while ($row = mysqli_fetch_assoc($x_check)) {
 		$terminals[] = $row['origin'];
 		if ($row['origin'] == $origin) {
@@ -33,12 +33,12 @@
 
 	echo "<br />".$get_dx_ori." to ".$get_dx_dest."<br />";
 
-	//fetch destinasi dan origin
+	//Fetch destination and origin
 	$check_r2 = "SELECT * FROM route_list";
 	$x_check2 = mysqli_query($connect, $check_r2);
 	$countx = mysqli_num_rows($x_check2);
 
-	//assign ke matrix
+	//Assign to matrix
 	while ($row = mysqli_fetch_assoc($x_check2)) {
 		$ori = array_search($row['origin'], $terminals);
 		$dest = array_search($row['destination'], $terminals);
