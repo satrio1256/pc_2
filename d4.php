@@ -17,21 +17,28 @@
 	//Build array
 	for ($i=0; $i<$count; $i++) {
 		for ($j=0; $j<$count; $j++) {
-			$_distArr[$i][$j] = 0;
+			$_distArr[$i][$j] = NULL;
 		}
 	}
 
 	//Fetch data terminal
 	while ($row = mysqli_fetch_assoc($x_check)) {
 		$terminals[] = $row['origin'];
+		if ($row['origin'] == $origin) {
+			$get_dx_ori = array_search($row['origin'], $terminals);
+		} else if ($row['origin'] == $destinate) {
+			$get_dx_dest = array_search($row['origin'], $terminals);
+		}
 	}
+
+	echo "<br />".$get_dx_ori." to ".$get_dx_dest."<br />";
 
 	//fetch destinasi dan origin
 	$check_r2 = "SELECT * FROM route_list";
 	$x_check2 = mysqli_query($connect, $check_r2);
 	$countx = mysqli_num_rows($x_check2);
 
-	//fetch ke array
+	//assign ke matrix
 	while ($row = mysqli_fetch_assoc($x_check2)) {
 		$ori = array_search($row['origin'], $terminals);
 		$dest = array_search($row['destination'], $terminals);
@@ -39,10 +46,12 @@
 		$_distArr[$ori][$dest] = 1;
 		$_distArr[$dest][$ori] = 1;
 	}
+
 	define('I',1000);
 	$dijkstra = new Dijkstra($_distArr, I, $count);
-	$fromClass = $origin; 
-	$toClass = $destinate; 
+
+	$fromClass = $get_dx_ori; 
+	$toClass = $get_dx_dest; 
 
 	$dijkstra->findShortestPath($fromClass, $toClass);
 
@@ -57,6 +66,7 @@
 	//echo $dijkstra -> printMap($ourMap); 
 	echo "\n\n the shortest route from class  ".$fromClass." to ".$toClass." is  :\n"; 
 	echo $dijkstra -> getResults((int)$toClass);
+	echo "return complete";
 	echo '</pre>'; 
 
 

@@ -94,7 +94,7 @@ class Dijkstra {
             $endNode = null; 
             $currNode = $i; 
             $ourShortestPath[$i][] = $i; 
-            while ($endNode === null || $endNode != $this -> startnode) { 
+            while ($endNode === null || $endNode !== $this -> startnode) { 
                 $ourShortestPath[$i][] = $this -> previousNode[$currNode]; 
                 $endNode = $this -> previousNode[$currNode]; 
                 $currNode = $this -> previousNode[$currNode]; 
@@ -102,7 +102,7 @@ class Dijkstra {
             $ourShortestPath[$i] = array_reverse($ourShortestPath[$i]); 
             if ($to === null || $to === $i) { 
             if($this -> distance[$i] >= $this -> infiniteDistance) { 
-                $foo .= sprintf("no route from %d to %d. \n",$this -> startnode,$i); 
+                $foo .= sprintf("no route from %d to %d. \n",$this -> startnode,$i);
             } else { 
                 $foo .= sprintf(' From %d => to  %d = %d (meters) <br> destinations [%d]: Follow the route to the classes (%s).'."\n" , 
                         $this -> startnode,$i,$this -> distance[$i], 
@@ -113,8 +113,8 @@ class Dijkstra {
                 if ($to === $i) { 
                     break; 
                 } 
-            } 
-        } 
+            }
+        }
         return $foo; 
     } 
 } // end class 
