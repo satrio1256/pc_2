@@ -11,7 +11,7 @@ Example :
 
 3) Set your database connection. <br />
 Since we are using mysqli for the connection, you'll need a $connect variable.
-The value of $connect variable is :
+The value of $connect variable is : <br />
 $connect = new mysqli($hostname, $username, $password, $db_name);
 
 Then you're good to go.
