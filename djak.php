@@ -104,15 +104,13 @@ class Dijkstra {
             if($this -> distance[$i] >= $this -> infiniteDistance) { 
                 $foo .= sprintf("no route from %d to %d. \n",$this -> startnode,$i);
             } else { 
-                $foo .= sprintf(' From %d => to  %d = %d (meters) <br> destinations [%d]: Follow the route to the classes (%s).'."\n" , 
-                        $this -> startnode,$i,$this -> distance[$i], 
-                        count($ourShortestPath[$i]), 
+                $foo .= sprintf('%s', 
                         implode('-',$ourShortestPath[$i])); 
             } 
-            $foo .= str_repeat('-',20) . "\n"; 
+            /*$foo .= str_repeat('-',20) . "\n"; 
                 if ($to === $i) { 
                     break; 
-                } 
+                }*/ 
             }
         }
         return $foo; 

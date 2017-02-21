@@ -55,20 +55,24 @@
 
 	$dijkstra->findShortestPath($fromClass, $toClass);
 
-	//prints
-	print_r($_distArr);
-	//print_r($ori);
-	//print_r($dest);
-	print_r($terminals);
-
-	echo '<pre>'; 
-	//echo "the map looks like:\n\n"; 
-	//echo $dijkstra -> printMap($ourMap); 
-	echo "\n\n the shortest route from class  ".$fromClass." to ".$toClass." is  :\n"; 
-	echo $dijkstra -> getResults((int)$toClass);
-	echo "return complete";
+	echo '<pre>';
+	echo "\n\n the shortest route from class  ".$origin." to ".$destinate." is  :\n"; 
+	$rtt = $dijkstra -> getResults((int)$toClass);
+	$i = 0;
+	$temp = "";
+	$new = "";
+	while ($i < strlen($rtt)+1) {
+		if (isset($rtt[$i]) && $rtt[$i] != "-") {
+			$temp = $rtt[$i];
+		} else {
+			$new .= str_replace(intval($temp), $terminals[intval($temp)], intval($temp));
+			$new .= '-';
+		}
+		$i++;
+	}
+	$new = rtrim($new, "-");
+	echo $new;
+	echo "<br />return complete";
 	echo '</pre>'; 
-
-
 ?>
 
