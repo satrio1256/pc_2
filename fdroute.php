@@ -3,7 +3,8 @@
 	if (isset($_POST['buy'])) {
 		$pss = mysqli_real_escape_string($connect, $_POST['pss']);
 		$psg_c = mysqli_real_escape_string($connect, $_POST['psg_c']);
-		$psg_oid = random_bytes(32);
+		$token = random_bytes(32);
+		$psg_oid = hash('sha256', $token);
 		for ($i=0; $i<$psg_c; $i++) {
 			$save_sql = "INSERT INTO ticket_orders (psg_oid, psg_ori, psg_dest, psg_r)
 					VALUES ('$psg_oid', '$origin', '$destinate', '$new')";
