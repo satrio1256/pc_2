@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700');
-@font-face {
-    font-family: Ubuntu;
-    src: url(../fonts/ubuntu/Ubuntu-Light.ttf);
-}
+@import url('https://fonts.googleapis.com/css?family=Mako');
 @font-face {
     font-family: BreeSerif;
     src: url(../fonts/breeserif/BreeSerif-Regular.ttf);
@@ -93,7 +90,6 @@ body {
 .box-ticket {
 	background: #e8e6e7;
 	width: 85%;
-	background: red;
 	margin: 0 auto;
 	padding: 10px;
 }
@@ -101,6 +97,9 @@ body {
 .ticket-name, .ticket-transits {
 	display: inline-block;
 	vertical-align: top;
+	font-family: "Roboto Condensed", sans-serif;
+	font-size: 50px;
+	color: #686667;
 }
 
 .ticket-name {
@@ -117,8 +116,33 @@ body {
 	color: #686667;	
 }
 
+.detail-cnt {
+	text-align: left;
+	width: 95%;
+	margin: 15px auto;
+	font-family: "Mako", sans-serif;
+}
+
+.detail-head {
+	color: #e0774a;
+	margin: 0;
+}
+
+.detail-body {
+	width: 100%;
+	font-size: 15px;
+	color: #5f5f5f;
+	border: 0;
+	background: transparent;
+	border-bottom: 1px solid #7c7c7c;
+}
+
+.detail-body:focus {
+	outline: none;
+}
+
 .head-sub {
-	font-family: Ubuntu, sans-serif;
+	font-family: "Mako", sans-serif;
 	font-size: 17px;
 	color: #e0774a;
 }
@@ -140,7 +164,7 @@ body {
 }
 
 .form-head {
-	font-family: Ubuntu, sans-serif;
+	font-family: "Mako", sans-serif;
 	margin-top: 10px;
 	text-align: left;
 }

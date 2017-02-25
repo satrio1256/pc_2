@@ -102,7 +102,8 @@ class Dijkstra {
             $ourShortestPath[$i] = array_reverse($ourShortestPath[$i]); 
             if ($to === null || $to === $i) { 
             if($this -> distance[$i] >= $this -> infiniteDistance) { 
-                $foo .= sprintf("no route from %d to %d. \n",$this -> startnode,$i);
+                //$foo .= sprintf("No route from %d to %d. \n",$this -> startnode,$i);
+                $foo .= "No Route";
             } else { 
                 $foo .= sprintf('%s', 
                         implode('-',$ourShortestPath[$i])); 

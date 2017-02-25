@@ -26,8 +26,6 @@
 			}
 		}
 
-		echo "<br />".$get_dx_ori." to ".$get_dx_dest."<br />";
-
 		//Fetch destination and origin
 		$check_r2 = "SELECT * FROM route_list";
 		$x_check2 = mysqli_query($connect, $check_r2);
@@ -50,20 +48,24 @@
 
 		$dijkstra->findShortestPath($fromClass, $toClass);
 		$rtt = $dijkstra -> getResults((int)$toClass);
-		$i = 0;
-		$count = 0;
-		$temp = "";
-		$new = "";
-		while ($i < strlen($rtt)+1) {
-			if (isset($rtt[$i]) && $rtt[$i] != "-") {
-				$temp = $rtt[$i];
-			} else {
-				$new .= str_replace(intval($temp), $terminals[intval($temp)], intval($temp));
-				$new .= '-';
-				$count++;
+		if ($rtt != "No Route") {
+			$i = 0;
+			$count = 0;
+			$temp = "";
+			$new = "";
+			while ($i < strlen($rtt)+1) {
+				if (isset($rtt[$i]) && $rtt[$i] != "-") {
+					$temp = $rtt[$i];
+				} else {
+					$new .= str_replace(intval($temp), $terminals[intval($temp)], intval($temp));
+					$new .= '-';
+					$count++;
+				}
+				$i++;
 			}
-			$i++;
+			$new = rtrim($new, "-");
+		} else {
+			$new = "No Route";
 		}
-		$new = rtrim($new, "-");
 ?>
 
