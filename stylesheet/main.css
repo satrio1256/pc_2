@@ -1,6 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:700');
+@font-face {
+    font-family: Ubuntu;
+    src: url(../fonts/ubuntu/Ubuntu-Light.ttf);
+}
+@font-face {
+    font-family: BreeSerif;
+    src: url(../fonts/breeserif/BreeSerif-Regular.ttf);
+}
+
 body {
-	background-color: #FFFFCC;
+	/*background-color: #FFFFCC;*/
+	background: #e3e4e6;
+	background-image: url("../images/bg.jpg");
+	background-size: cover;
+	background-position: center center;
 	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.home-topbar {
+	height: 40px;
+	background: #f0f0f0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.top-left {
+	height: 100%;
+	margin-right: 20px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.left-img {
+	height: 100%;
+	padding: 0 10px;
+	margin: 0 15px;
+	background: #cae2e2;
+}
+
+.top-right {
+	height: 100%;
+	margin-left: 20px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.top-right ul {
+	font-family: BreeSerif, sans-serif;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.top-right ul li {
+	display: inline-block;
+	margin: 0 30px;
+}
+
+.top-right ul li a {
+	text-decoration: none;
+	color: #686667;
+	transition: 0.5s;
+}
+
+.top-right ul li a:hover {
+	color: blue !important;
 }
 
 .main-container {
@@ -10,6 +81,46 @@ body {
 	transform: translate(-50%, -50%);
 	width: 70%;
 	text-align: center;
+}
+
+.box {
+	background: #e8e6e7;
+	width: 40%;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.box-ticket {
+	background: #e8e6e7;
+	width: 85%;
+	background: red;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.ticket-name, .ticket-transits {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.ticket-name {
+	
+}
+
+.ticket-transits {
+
+}
+
+.box-head {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 50px;
+	color: #686667;	
+}
+
+.head-sub {
+	font-family: Ubuntu, sans-serif;
+	font-size: 17px;
+	color: #e0774a;
 }
 
 .icon {
@@ -29,6 +140,7 @@ body {
 }
 
 .form-head {
+	font-family: Ubuntu, sans-serif;
 	margin-top: 10px;
 	text-align: left;
 }
@@ -39,13 +151,24 @@ body {
 	border: 0;
 	padding: 10px;
 	margin: 4px 0 4px 0;
+	border-radius: 7px;
+}
+
+.form-select:hover {
+	outline: none;
 }
 
 .check_av {
 	margin: 15px auto;
-	background: green;
+	border-radius: 25px;
+	background: #e0703f;
 	border: 0;
 	padding: 10px;
 	display: block;
 	color: white;
+}
+
+.check_av:hover {
+	cursor: pointer;
+	background: rgba(224, 112, 63, .8);
 }

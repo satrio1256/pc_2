@@ -1,5 +1,5 @@
-<?php
-	require('sql/login-proj.php');
+<?php 
+	require ("d4.php");
 ?>
 <html>
 <head>
@@ -21,15 +21,26 @@
 		</div>
 	</div>
 	<div class="main-container">
-		<?php 
-			if (empty($_GET['menu']) || isset ($_GET['menu']) && $_GET['menu'] == 'home') {
-				include ('home.php');
-			} else if (isset($_GET['menu'])) {
-				if ($_GET['menu'] == 'reservasi') {
-					include ('pesan.php');
-				}
-			}
-		?>
+		<div class="box-ticket">
+			<div class="ticket-top">
+				<div class="ticket-name">
+					<h3></h3>
+				</div>
+				<div class="ticket-transits">
+					<?php if ($count > 2) {
+						echo $count;
+					} else {
+						$count = 0;
+						echo $count;
+					} ?>
+				</div>
+			</div>
+			<div class="ticket-bottom">
+				<div class="ticket-routes">
+					<?php echo $new; ?>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
