@@ -21,8 +21,7 @@
 		if (!$x_ord) {
 			echo("Error description: " . mysqli_error($connect));
 		} else {
-			$aa = $psg_name;
-			header ("Location: payment.php?oid=$oid&name=$aa");
+			header ("Location: payment.php?oid=$oid");
 		}
 	}
 ?>
