@@ -1,6 +1,29 @@
-<?php 
+<?php
+	require ("sql/login-proj.php");
 	if (empty($_GET['oid']) && empty($_GET['h'])) {
 		header ('Location: index.php?menu=reservasi');
+	}
+
+	if (isset($_POST['cnt'])) {
+		$h = $_GET['h'];
+		$i = 0;
+		while ($i<$h) {
+			$psg_name = mysqli_real_escape_string($connect, $_POST['psg_name'][$i]);
+			$psg_ph = mysqli_real_escape_string($connect, $_POST['psg_ph'][$i]);
+			$psg_mail = mysqli_real_escape_string($connect, $_POST['psg_mail'][$i]);
+			$oid = $_GET['oid'];
+
+			$psg_ord = "UPDATE ticket_orders SET psg_name='$psg_name', psg_ph='$psg_ph', psg_mail='$psg_mail' WHERE psg_oid='$oid' AND psg_name='' LIMIT 1";
+			$x_ord = mysqli_query($connect, $psg_ord);
+			$i++;
+		}
+
+		if (!$x_ord) {
+			echo("Error description: " . mysqli_error($connect));
+		} else {
+			$aa = $psg_name;
+			header ("Location: payment.php?oid=$oid&name=$aa");
+		}
 	}
 ?>
 
@@ -43,24 +66,24 @@
 								<div class="detail-head">
 									Nama Penumpang
 								</div>
-								<input class="detail-body" min="1" value="1" name="psg_name">
+								<input class="detail-body" name="psg_name[<?php echo $i; ?>]">
 							</div>
 							<div class="detail-cnt">
 								<div class="detail-head">
 									Nomor Telepon Penumpang
 								</div>
-								<input class="detail-body" pattern="" name="psg_ph">
+								<input class="detail-body" pattern="[0-9]{3,}" name="psg_ph[<?php echo $i; ?>]">
 							</div>
 							<div class="detail-cnt">
 								<div class="detail-head">
 									Email
 								</div>
-								<input class="detail-body" min="1" value="1" name="psg_mail">
+								<input class="detail-body" type="email" name="psg_mail[<?php echo $i; ?>]">
 							</div>
 							<br />
 						<?php }
 					?>
-					<button class="check_av" type="submit" name="buy">Pesan Tiket</button>
+					<button class="check_av" type="submit" name="cnt">Lanjutkan ke Pembayaran</button>
 				</form>
 			</div>
 		</div>
