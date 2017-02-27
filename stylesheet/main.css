@@ -106,14 +106,6 @@ body {
 	color: #686667;
 }
 
-.ticket-name {
-	
-}
-
-.ticket-transits {
-
-}
-
 .box-head {
 	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 50px;
@@ -160,7 +152,6 @@ body {
 	height: 100px;
 	width: 100px;
 	border-radius: 50px;
-	border: 2px solid #000;
 }
 
 .icon img:hover {

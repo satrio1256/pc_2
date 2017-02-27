@@ -10,7 +10,7 @@
 					VALUES ('$psg_oid', '$origin', '$destinate', '$new')";
 			$save_x = mysqli_query($connect, $save_sql);
 		};
-		header ("Location: psginfo.php?oid=$psg_oid&h=$psg_c");
+		header ("Location: psginfo.php?oid=$psg_oid&h=$psg_c&t=$count");
 	}
 ?>
 <html>
@@ -19,19 +19,7 @@
 	<link rel="stylesheet" href="stylesheet/main.css">
 </head>
 <body>
-	<div class="home-topbar">
-		<div class="top-left">
-			<img class="left-img" src="images/logo.png"/>
-		</div>
-		<div class="top-right">
-			<ul>
-				<li><a href="#">BELI TIKET</a></li>
-				<li><a href="#">CEK PESANAN</a></li>
-				<li><a href="#">BANTUAN</a></li>
-				<li><a href="#" style="color: #e0774a;">LOGIN</a></li>	
-			</ul>
-		</div>
-	</div>
+	<?php include ("topbar.php") ?>
 	<div class="main-container">
 		<div class="box">
 			<div class="box-head">
@@ -71,9 +59,25 @@
 								$count -= 2;
 								echo $count." kali transit";
 							} else {
-								$count = "Tanpa Transit";
-								echo $count;
+								$count = 0;
+								echo "Tanpa Transit";
 							} ?>
+						</div>
+					</div>
+					<div class="detail-cnt">
+						<div class="detail-head">
+							Tanggal Keberangkatan
+						</div>
+						<div class="detail-body">
+							<input class="detail-body" type="date" name="date" value="<?php echo $_REQUEST['date']; ?>"/>
+						</div>
+					</div>
+					<div class="detail-cnt">
+						<div class="detail-head">
+							Jam Keberangkatan
+						</div>
+						<div class="detail-body">
+							<?php echo $time; ?>
 						</div>
 					</div>
 					<div class="detail-cnt">
@@ -84,21 +88,35 @@
 							<?php echo $new ?>
 						</div>
 					</div>
-					<div class="detail-cnt">
-						<div class="detail-head">
-							Sisa Tempat
-						</div>
-						<div class="detail-body">
-							1 kursi kosong
-						</div>
-					</div>
-					<div class="detail-cnt">
-						<div class="detail-head">
-							Jumlah Penumpang
-						</div>
-					<input class="detail-body" type="number" min="1" value="1" name="psg_c">
-					</div>
-					<button class="check_av" type="submit" name="buy">Pesan Tiket</button>
+					<?php 
+						if ($seat_count < 1) { ?>
+							<div>
+								<br />
+								<center style="color: red; font-family: 'Mako', sans-serif; font-size: 15px;">
+								Maaf, kapal dengan rute tersebut sudah penuh.
+								</center>
+								<br />
+							</div>
+						<?php } else { ?>
+							<div class="detail-cnt">
+								<div class="detail-head">
+									Sisa Tempat
+								</div>
+								<div class="detail-body">
+									<?php 
+										echo $seat_count." kursi tersedia";
+									?>
+								</div>
+							</div>
+							<div class="detail-cnt">
+								<div class="detail-head">
+									Jumlah Penumpang (maksimal 5 orang)
+								</div>
+							<input class="detail-body" type="number" min="1" max="<?php if ($seat_count > 5) { echo 5;} else { echo $seat_count; } ?>" value="1" name="psg_c">
+							</div>
+							<button class="check_av" type="submit" name="buy">Pesan Tiket</button>
+						<?php }
+					?>
 				</form>
 			</div>
 		</div>

@@ -7,29 +7,19 @@
 	<link rel="stylesheet" href="stylesheet/main.css">
 </head>
 <body>
-	<div class="home-topbar">
-		<div class="top-left">
-			<img class="left-img" src="images/logo.png"/>
-		</div>
-		<div class="top-right">
-			<ul>
-				<li><a href="#">BELI TIKET</a></li>
-				<li><a href="#">CEK PESANAN</a></li>
-				<li><a href="#">BANTUAN</a></li>
-				<li><a href="#" style="color: #e0774a;">LOGIN</a></li>	
-			</ul>
-		</div>
-	</div>
+	<?php include ("topbar.php") ?>
 	<div class="main-container">
-		<?php 
-			if (empty($_GET['menu']) || isset ($_GET['menu']) && $_GET['menu'] == 'home') {
-				include ('home.php');
-			} else if (isset($_GET['menu'])) {
-				if ($_GET['menu'] == 'reservasi') {
-					include ('pesan.php');
+		<div class="box">
+			<?php 
+				if (empty($_GET['menu']) || isset ($_GET['menu']) && $_GET['menu'] == 'home') {
+					include ('home.php');
+				} else if (isset($_GET['menu'])) {
+					if ($_GET['menu'] == 'reservasi') {
+						include ('pesan.php');
+					}
 				}
-			}
-		?>
+			?>
+		</div>
 	</div>
 </body>
 </html>

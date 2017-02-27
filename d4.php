@@ -3,8 +3,14 @@
 		require ("sql/login-proj.php");
 		$origin = mysqli_real_escape_string($connect, $_REQUEST['ori']);
 		$destinate = mysqli_real_escape_string($connect, $_REQUEST['dest']);
+		$date = mysqli_real_escape_string($connect, $_REQUEST['date']);
+		$time = mysqli_real_escape_string($connect, $_REQUEST['time']);
 
-		$check_r = "SELECT DISTINCT origin FROM route_list UNION SELECT DISTINCT destination FROM route_list";
+		if ($origin == $destinate) {
+			header ("Location: index.php?menu=reservasi&err=s");
+		}
+
+		$check_r = "SELECT DISTINCT origin FROM route_lists UNION SELECT DISTINCT destination FROM route_lists";
 		$x_check = mysqli_query($connect, $check_r);
 		$count = mysqli_num_rows($x_check);
 		$_distArr = array();
@@ -27,7 +33,7 @@
 		}
 
 		//Fetch destination and origin
-		$check_r2 = "SELECT * FROM route_list";
+		$check_r2 = "SELECT * FROM route_lists";
 		$x_check2 = mysqli_query($connect, $check_r2);
 		$countx = mysqli_num_rows($x_check2);
 
@@ -67,5 +73,16 @@
 		} else {
 			$new = "No Route";
 		}
+
+		$occup = "SELECT psg_name FROM ticket_orders WHERE psg_ori='$origin' AND psg_dest='$destinate' AND psg_date='$date' AND psg_time='$time'";
+		$xoccup = mysqli_query($connect, $occup);
+		$pscount = mysqli_num_rows($xoccup);
+
+		$remain = "SELECT schedule_seat FROM boarding_schedule WHERE schedule_origin='$origin' AND schedule_destination='$destinate' AND schedule_date='$date' AND schedule_depart='$time'";
+		$xcute = mysqli_query($connect, $remain);
+		if ($seat_left = mysqli_fetch_assoc($xcute)) {
+			$st = $seat_left['schedule_seat'];
+			$seat_count = $st-$pscount;
+		};
 ?>
 
