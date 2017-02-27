@@ -6,8 +6,8 @@
 		$token = random_bytes(32);
 		$psg_oid = hash('sha256', $token);
 		for ($i=0; $i<$psg_c; $i++) {
-			$save_sql = "INSERT INTO ticket_orders (psg_oid, psg_ori, psg_dest, psg_r)
-					VALUES ('$psg_oid', '$origin', '$destinate', '$new')";
+			$save_sql = "INSERT INTO ticket_orders (psg_oid, psg_ori, psg_dest, psg_time)
+					VALUES ('$psg_oid', '$origin', '$destinate', '$time')";
 			$save_x = mysqli_query($connect, $save_sql);
 		};
 		header ("Location: psginfo.php?oid=$psg_oid&h=$psg_c&t=$count");
@@ -89,11 +89,11 @@
 						</div>
 					</div>
 					<?php 
-						if ($seat_count < 1) { ?>
+						if (empty($seat_count) || $seat_count < 1) { ?>
 							<div>
 								<br />
 								<center style="color: red; font-family: 'Mako', sans-serif; font-size: 15px;">
-								Maaf, kapal dengan rute tersebut sudah penuh.
+								Maaf, kapal dengan rute tersebut sudah penuh atau perjalanan pada jadwal tersebut tidak tersedia.
 								</center>
 								<br />
 							</div>
@@ -104,7 +104,12 @@
 								</div>
 								<div class="detail-body">
 									<?php 
-										echo $seat_count." kursi tersedia";
+										if (isset($seat_count)) {
+											echo $seat_count." kursi tersedia";
+										} else {
+											$seat_count = "Perjalanan Tidak Tersedia";
+											echo $seat_count;
+										}
 									?>
 								</div>
 							</div>

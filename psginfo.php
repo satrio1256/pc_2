@@ -64,12 +64,6 @@
 										</div>
 										<input class="detail-body" pattern="[0-9]{3,}" name="psg_ph[<?php echo $i; ?>]">
 									</div>
-									<div class="detail-cnt">
-										<div class="detail-head">
-											Email
-										</div>
-										<input class="detail-body" type="email" name="psg_mail[<?php echo $i; ?>]">
-									</div>
 								<?php }
 							?>
 							<br />
