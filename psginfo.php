@@ -54,7 +54,7 @@
 								<div class="detail-head">
 									Nama Penumpang
 								</div>
-								<input class="detail-body" name="psg_name[<?php echo $i; ?>]">
+								<input class="detail-body" name="psg_name[<?php echo $i; ?>]" required>
 							</div>
 							<?php 
 								if ($i == 0) { ?>

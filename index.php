@@ -16,6 +16,8 @@
 				} else if (isset($_GET['menu'])) {
 					if ($_GET['menu'] == 'reservasi') {
 						include ('pesan.php');
+					} else if ($_GET['menu'] == 'cek') {
+						include ('cek.php');
 					}
 				}
 			?>

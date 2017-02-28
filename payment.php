@@ -7,13 +7,20 @@
 
 	if (isset($_POST['check_r'])) {
 		$payments = mysqli_real_escape_string($connect, $_POST['payments']);
-		$cash = "UPDATE ticket_orders SET payment_method='$payments' WHERE psg_oid='$oid'";
+		if ($payments == 'transfer') {
+			$rek = rand(1000, 9999).$count.'145';
+		} else {
+			$rek = "";
+		}
+		$code = strtoupper(substr($_GET['oid'], 40, 7));
+		
+		$cash = "UPDATE ticket_orders SET payment_method='$payments', psg_rekening='$rek', psg_code='$code' WHERE psg_oid='$oid'";
 		$xcute = mysqli_query($connect, $cash);
 
 		if (!$xcute) {
 			echo("Error description: " . mysqli_error($connect));
 		} else {
-			header ("Location: thanks.php");
+			header ("Location: thanks.php?oid=$oid");
 		}
 	}
 ?>
